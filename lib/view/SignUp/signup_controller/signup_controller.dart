@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:api_practice_app/view/Login/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
@@ -19,17 +20,17 @@ class SignupController extends GetxController{
     File?file,
   })async{
     isLoading.value = true;
-     try{
+
+    Map<String,dynamic> body ={
+      "name": name,
+      "email": email,
+      "password": password,
+      "confirmPassword": confirmPassword,
+    };
+    try{
       final response = await post(Uri.parse("http://172.252.13.83:2000/api/v1/users"),
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: jsonEncode({
-          "name": name,
-          "email": email,
-          "password": password,
-          "confirmPassword": confirmPassword,
-        }),
+
+        body: body,
       );
 
       if (response.statusCode == 200) {
@@ -40,8 +41,10 @@ class SignupController extends GetxController{
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
+        Get.to(()=> LoginScreen());
 
-      } else {
+      }
+      else {
         final errorData = jsonDecode(response.body);
         String errorMessage = errorData['message'] ?? 'SignUp failed';
         Get.snackbar(

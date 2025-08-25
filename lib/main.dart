@@ -1,8 +1,10 @@
-import 'package:api_practice_app/view/Login/login_screen/login_screen.dart';
+import 'package:api_practice_app/view/SignUp/signup_screen/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async{
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: SignupScreen(),
     );
   }
 }
