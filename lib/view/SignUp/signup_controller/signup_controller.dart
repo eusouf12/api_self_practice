@@ -29,8 +29,10 @@ class SignupController extends GetxController{
     };
     try{
       final response = await post(Uri.parse("http://172.252.13.83:2000/api/v1/users"),
-
-        body: body,
+        headers: {
+          "Content-Type": "application/json", 
+        },
+        body: jsonEncode(body),
       );
 
       if (response.statusCode == 200) {

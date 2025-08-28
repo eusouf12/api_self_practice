@@ -1,4 +1,5 @@
 import 'package:api_practice_app/view/Login/login_screen/login_screen.dart';
+import 'package:api_practice_app/view/MyTask/my_task_screen/my_task_screen.dart';
 import 'package:api_practice_app/view/SignUp/signup_controller/signup_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Register Page"),
+        title: Center(child: Text("Register Page")),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
@@ -106,6 +107,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     },
                     child: Text("Login", style: TextStyle(color: Colors.blue)),
                   ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(MyTaskScreen());
+                    },
+                    child: Text("My tasks", style: TextStyle(color: Colors.blue)),
+                  ),
                 ],
               ),
               SizedBox(height: 20),
@@ -120,12 +127,14 @@ class _SignupScreenState extends State<SignupScreen> {
                           submitForm();
                           print("Register");
                         },
-                  child: controller.isLoading.value
-                      ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text(
-                          "SignUp",
-                          style: TextStyle(color: Colors.black),
-                        ),
+                  child: Center(
+                    child: controller.isLoading.value
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text(
+                            "SignUp",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                  ),
                 );
               }),
             ],

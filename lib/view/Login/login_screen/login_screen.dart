@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Login Page"),
+        title: Center(child: Text("Login Page")),
       ),
 
 
@@ -86,9 +86,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: controller.isLoading.value ? null : () {
                     submitForm();
                   },
-                  child: controller.isLoading.value
-                      ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text("Login",style: TextStyle(color: Colors.black),),
+                  child: Center(
+                    child: controller.isLoading.value
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text("Login",style: TextStyle(color: Colors.black),),
+                  ),
                 );
               }),
             ],
