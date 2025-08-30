@@ -1,7 +1,8 @@
-import 'package:api_practice_app/view/SignUp/signup_screen/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
+import 'Prodact/add_product/add_product_screen.dart';
 
 void main() async{
   await GetStorage.init();
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
-      home: SignupScreen(),
+      home: AddProductScreen(),
+
     );
   }
 }
