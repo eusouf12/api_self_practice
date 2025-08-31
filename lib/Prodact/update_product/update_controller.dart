@@ -6,19 +6,19 @@ import 'package:http/http.dart';
 
 import '../read_product/read_product_screen.dart';
 
-class AddProductController extends GetxController {
-
+class UpdateController extends GetxController {
   final isLoading = false.obs;
-
-  Future<void> addProduct({
+  
+  Future<void> updateProduct({
     required String productName,
     required String productCode,
     required String productImage,
     required String unitPrice,
     required String totalPrice,
-})async{
-    isLoading.value = true;
+    required String id,
 
+}) async{
+    isLoading.value = true;
     Map<String,dynamic> body = {
       "ProductName" : productName,
       "ProductCode": productCode,
@@ -26,50 +26,49 @@ class AddProductController extends GetxController {
       "TotalPrice": totalPrice,
       "UnitPrice": unitPrice
     };
-
+    
     try{
-      final response = await post(Uri.parse("https://crud.teamrabbil.com/api/v1/CreateProduct"),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: jsonEncode(body),
+      final response = await post(Uri.parse("https://crud.teamrabbil.com/api/v1/UpdateProduct/$id"),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode(body),
       );
 
       print("STATUS CODE: ${response.statusCode}");
       print("RESPONSE BODY: ${response.body}");
 
       if(response.statusCode == 200)
-        {
-          Get.snackbar("Success",
-            "Product Add Successfully",
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-          );
-          Future.delayed(Duration(seconds: 2), () {
-            Get.to(() => ReadProductScreen());
-          });
-        }
+      {
+        Get.snackbar("Success",
+          "Product Update Successfully",
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+        Future.delayed(Duration(seconds: 2), () {
+          Get.to(() => ReadProductScreen());
+        });
+      }
       else{
         final errorData = jsonDecode(response.body);
-        String errorMassage = errorData['message'] ?? "Fail to add Product";
+        String errorMassage = errorData['message'] ?? "Fail to Update Product";
         Get.snackbar(
-            "error", errorMassage,
+            "Error", errorMassage,
             backgroundColor: Colors.red,
             colorText: Colors.white
         );
       }
+      
     }
     catch (e){
       Get.snackbar(
           "error",
-         "Something went wrong: ${e.toString()}",
+          "Something went wrong: ${e.toString()}",
           backgroundColor: Colors.red,
           colorText: Colors.white
       );
-    }
-    finally{
+    }finally{
       isLoading.value = false;
     }
   }
-
 }
