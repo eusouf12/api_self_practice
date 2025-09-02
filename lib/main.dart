@@ -1,10 +1,19 @@
+import 'package:api_practice_app/socket/socket_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'Prodact/add_product/add_product_screen.dart';
-
 void main() async{
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.black,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.light,
+      systemNavigationBarColor: Colors.black,
+      systemNavigationBarIconBrightness: Brightness.light,
+
+  ));
   await GetStorage.init();
   runApp(const MyApp());
 }
@@ -12,20 +21,23 @@ void main() async{
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'API PRACTICE',
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.cyanAccent,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.transparent,
+        scaffoldBackgroundColor: Colors.transparent,
+        appBarTheme: const AppBarTheme(
+          toolbarHeight: 65,
+          elevation: 0,
+          centerTitle: true,
+          backgroundColor: Colors.cyanAccent,
+          iconTheme: IconThemeData(color: Colors.green),
         ),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
-      home: AddProductScreen(),
+      defaultTransition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 200),
+      home: SocketScreen(),
 
     );
   }

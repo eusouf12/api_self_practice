@@ -59,7 +59,7 @@ class _ReadProductScreenState extends State<ReadProductScreen> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: .60,
+                childAspectRatio: .55,
               ),
               itemBuilder: (context, index) {
                 return Container(
